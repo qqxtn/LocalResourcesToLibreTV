@@ -5,7 +5,8 @@
   "description": "Local MacCMS-compatible video resource API for LibreTV.",
   "scripts": {
     "start": "node server.js",
-    "scan": "node server.js --scan"
+    "scan": "node server.js --scan",
+    "build:exe": "dotnet publish .\\LocalLibreTvTray\\LocalLibreTvTray.csproj -c Release -o .\\dist"
   },
   "engines": {
     "node": ">=18"

@@ -1,0 +1,36 @@
+# IDE / editor
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# .NET build output
+bin/
+obj/
+
+# Published executables
+dist/
+*.pdb
+
+# Local media files
+media/**
+!media/
+!media/.gitkeep
+!media/movies/
+!media/movies/.gitkeep
+!media/tv/
+!media/tv/.gitkeep
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

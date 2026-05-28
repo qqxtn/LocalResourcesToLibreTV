@@ -16,6 +16,8 @@
 
 - Node.js 18 或更高版本
 - 本项目不需要安装第三方依赖
+- 如果只运行已打包的 Windows exe，不需要安装 Node.js
+- 如果需要重新生成 exe，需要 .NET 7 SDK 或更高版本
 
 ## 目录结构
 
@@ -41,7 +43,33 @@ media/
 - 剧集放在 `media/tv/剧名/`。
 - 支持的视频格式：`mp4`、`mkv`、`avi`、`mov`、`webm`、`m4v`、`ts`、`flv`、`wmv`、`rmvb`。
 
+## Windows 托盘版 exe
+
+已打包好的程序在：
+
+```text
+dist/LocalLibreTV.exe
+```
+
+运行后不会弹出 cmd 窗口，程序会出现在 Windows 右下角系统托盘。右键托盘图标可以打开 API、打开 `media` 文件夹或退出程序。
+
+exe 是单文件自包含程序，图标已经嵌入 exe，不需要随附 DLL 或其他运行文件。首次运行时会在 exe 同目录下自动创建 `media/movies` 和 `media/tv` 目录；视频文件仍需要放在这个 `media` 目录中。
+
+默认 API 地址：
+
+```text
+http://127.0.0.1:9978/api.php/provide/vod
+```
+
+重新生成 exe：
+
+```powershell
+npm run build:exe
+```
+
 ## 启动服务
+
+如果不使用 exe，也可以直接用 Node.js 启动服务：
 
 ```powershell
 npm start
@@ -165,6 +193,8 @@ Use it when you want to:
 
 - Node.js 18 or later
 - No third-party dependencies are required
+- The packaged Windows exe does not require Node.js to run
+- Rebuilding the exe requires .NET 7 SDK or later
 
 ## Folder Layout
 
@@ -190,7 +220,33 @@ Recommended layout:
 - Put TV shows in `media/tv/show-name/`.
 - Supported video formats: `mp4`, `mkv`, `avi`, `mov`, `webm`, `m4v`, `ts`, `flv`, `wmv`, `rmvb`.
 
+## Windows Tray exe
+
+The packaged app is:
+
+```text
+dist/LocalLibreTV.exe
+```
+
+When started, it does not open a cmd window. It runs from the Windows system tray. Right-click the tray icon to open the API, open the `media` folder, or quit the app.
+
+The exe is a self-contained single-file app with the icon embedded. It does not need side-by-side DLLs or runtime files. On first run, it creates `media/movies` and `media/tv` next to the exe; video files still need to be placed in that `media` folder.
+
+Default API URL:
+
+```text
+http://127.0.0.1:9978/api.php/provide/vod
+```
+
+Rebuild the exe:
+
+```powershell
+npm run build:exe
+```
+
 ## Start The Server
+
+If you do not use the exe, you can still start the Node.js server directly:
 
 ```powershell
 npm start
