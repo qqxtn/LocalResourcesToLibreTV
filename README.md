@@ -81,13 +81,23 @@ npm start
 http://127.0.0.1:9978/api.php/provide/vod
 ```
 
-如果 LibreTV 和这个服务运行在同一台电脑的同一个浏览器环境里，可以直接使用 `127.0.0.1`。
+如果 LibreTV 直接运行在同一台 Windows 电脑上，可以使用 `127.0.0.1`。
 
-如果 LibreTV 运行在 Docker、手机、电视盒子或另一台设备上，请把 `127.0.0.1` 换成这台电脑在局域网里的 IP，例如：
+如果 LibreTV 在同一台电脑的 Docker 中运行，请使用 Docker 提供的固定宿主机地址：
+
+```text
+http://host.docker.internal:9978/api.php/provide/vod
+```
+
+如果 LibreTV 运行在手机、电视盒子、NAS 或另一台电脑上，请使用这台电脑的局域网 IP，例如：
 
 ```text
 http://192.168.1.23:9978/api.php/provide/vod
 ```
+
+`127.0.0.1` 永远指向 LibreTV 当前所在的运行环境。在 Docker 中使用它会访问容器自身，而 `host.docker.internal` 会指向运行 `LocalLibreTV.exe` 的 Windows 宿主机。
+
+为了避免电脑的局域网 IP 发生变化，建议在路由器的 DHCP 设置中为这台电脑设置静态地址分配（DHCP 地址保留）。完成一次绑定后即可长期使用同一个局域网 IP，无需反复修改 LibreTV 配置。
 
 ## LibreTV 配置示例
 
@@ -95,13 +105,12 @@ http://192.168.1.23:9978/api.php/provide/vod
 
 ```js
 local: {
-    api: 'http://127.0.0.1:9978/api.php/provide/vod',
+    api: 'http://host.docker.internal:9978/api.php/provide/vod',
     name: '本地资源',
-    detail: 'http://127.0.0.1:9978',
 },
 ```
 
-如果 LibreTV 不在同一台电脑上运行，请把上面的 `127.0.0.1` 替换为本机局域网 IP。
+以上配置适用于 LibreTV 与本程序位于同一台电脑、LibreTV 在 Docker 中运行的情况。其他设备请将 `host.docker.internal` 替换为运行本程序的电脑局域网 IP。
 
 项目里也提供了一个配置片段文件：
 
@@ -258,13 +267,23 @@ Default API URL:
 http://127.0.0.1:9978/api.php/provide/vod
 ```
 
-If LibreTV runs in the same browser environment on the same computer, `127.0.0.1` is fine.
+If LibreTV runs directly on the same Windows computer, `127.0.0.1` is fine.
 
-If LibreTV runs in Docker, on a phone, on a TV box, or on another device, replace `127.0.0.1` with this computer's LAN IP, for example:
+If LibreTV runs in Docker on the same computer, use Docker's stable hostname for the Windows host:
+
+```text
+http://host.docker.internal:9978/api.php/provide/vod
+```
+
+If LibreTV runs on a phone, TV box, NAS, or another computer, use this computer's LAN IP, for example:
 
 ```text
 http://192.168.1.23:9978/api.php/provide/vod
 ```
+
+`127.0.0.1` always refers to LibreTV's own runtime environment. Inside Docker it points to the container itself, while `host.docker.internal` points to the Windows host running `LocalLibreTV.exe`.
+
+To prevent the computer's LAN IP from changing, reserve a fixed DHCP address for it in your router. Once the address is reserved, the LibreTV configuration can keep using the same LAN IP.
 
 ## LibreTV Configuration Example
 
@@ -272,13 +291,12 @@ Add an entry to LibreTV's `API_SITES`:
 
 ```js
 local: {
-    api: 'http://127.0.0.1:9978/api.php/provide/vod',
+    api: 'http://host.docker.internal:9978/api.php/provide/vod',
     name: 'Local Resources',
-    detail: 'http://127.0.0.1:9978',
 },
 ```
 
-If LibreTV is not running on the same computer, replace `127.0.0.1` with your computer's LAN IP.
+This example applies when LibreTV runs in Docker on the same computer as this app. For LibreTV on another device, replace `host.docker.internal` with the LAN IP of the computer running this app.
 
 A ready-to-copy config snippet is also included:
 
